@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Matt Grochocinski</title>
+  <meta name="description" content="Matt Grochocinski: IT and security by day, self-hosting and building things for the games I play by night.">
+  <meta property="og:description" content="IT and security by day. Self-hosting and building things for the games I play by night.">
+  <meta property="og:image" content="https://matt.grochocin.ski/og.jpg">
+  <meta property="og:url" content="https://matt.grochocin.ski/">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:title" content="Matt Grochocinski">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    :root { --red: #dc143c; --bg: #ffffff; --surface: #f6f6f4; --text: #1a1a1a; --muted: #5f5f5a; --line: #e4e4df; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #121212; --surface: #1c1c1c; --text: #ececea; --muted: #a3a39d; --line: #2c2c2a; --red: #ef3b5c; } }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { background: var(--bg); color: var(--text); font: 17px/1.65 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+    .flag { height: 10px; background: linear-gradient(#fff 50%, #dc143c 50%); border-bottom: 1px solid var(--line); }
+    main { max-width: 44rem; margin: 0 auto; padding: 64px 16px 48px; }
+    h1 { font-size: clamp(2.2rem, 7vw, 3.2rem); line-height: 1.05; letter-spacing: -.03em; margin: 0; }
+    h1 span { color: var(--red); }
+    .lede { font-size: 1.2rem; color: var(--muted); margin: .6rem 0 0; }
+    .bio p { margin: 1.1rem 0 0; }
+    .bio p:first-child { margin-top: 0; }
+    .intro { display: flex; align-items: center; gap: 1.5rem; margin-bottom: 2.25rem; }
+    .avatar { flex: 0 0 auto; width: 132px; height: 132px; border-radius: 26px; border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(0,0,0,.25); image-rendering: auto; }
+    @media (max-width: 560px) { .intro { flex-direction: column; align-items: flex-start; gap: 1.1rem; } .avatar { width: 112px; height: 112px; border-radius: 22px; } }
+    h2 { font-size: .78rem; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin: 3.25rem 0 1rem; }
+    .projects { display: grid; gap: 12px; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); }
+    .card { display: block; width: 100%; text-align: left; font: inherit; cursor: pointer; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; color: inherit; transition: border-color .15s, transform .15s; }
+    .card:hover, .card:focus-visible { border-color: var(--red); transform: translateY(-1px); outline: none; }
+    .card b { display: block; }
+    .card small { display: block; color: var(--muted); font-size: .9rem; margin-top: .15rem; }
+    .card .more { display: inline-block; margin-top: .6rem; color: var(--red); font-size: .85rem; font-weight: 700; }
+    dialog { width: min(40rem, calc(100% - 32px)); max-height: calc(100% - 48px); padding: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--bg); color: var(--text); box-shadow: 0 24px 60px rgba(0,0,0,.35); }
+    dialog::backdrop { background: rgba(0,0,0,.55); backdrop-filter: blur(3px); }
+    dialog[open] { animation: rise .18s ease-out; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @media (prefers-reduced-motion: reduce) { dialog[open] { animation: none; } .card:hover { transform: none; } }
+    .sheet { position: relative; padding: 1.75rem 1.5rem 1.5rem; border-top: 6px solid var(--red); }
+    .sheet h3 { margin: 0 2.5rem 0 0; font-size: 1.45rem; letter-spacing: -.01em; line-height: 1.2; }
+    .sheet .tag { margin: .3rem 0 0; color: var(--muted); }
+    .sheet p { margin: 1rem 0 0; }
+    .sheet ul { margin: 1rem 0 0; padding-left: 1.2rem; }
+    .sheet li { margin-top: .35rem; }
+    .sheet li::marker { color: var(--red); }
+    .gallery { margin: 1.1rem 0 0; }
+    .gallery .main { display: block; aspect-ratio: 16 / 10; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--surface); }
+    .gallery .main img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .gallery .main:hover { border-color: var(--red); }
+    .thumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+    .thumbs button { padding: 0; width: 76px; height: 50px; border: 2px solid var(--line); border-radius: 8px; overflow: hidden; background: var(--surface); cursor: pointer; opacity: .6; transition: opacity .15s, border-color .15s; }
+    .thumbs button img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+    .thumbs button:hover { opacity: 1; }
+    .thumbs button[aria-current="true"] { opacity: 1; border-color: var(--red); }
+    .close { position: absolute; top: .9rem; right: .9rem; width: 2.25rem; height: 2.25rem; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--muted); font-size: 1.35rem; line-height: 1; cursor: pointer; }
+    .close:hover { color: var(--text); border-color: var(--text); }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 1.5rem; }
+    .btn { padding: .6rem 1.1rem; border: 1px solid var(--line); border-radius: 999px; color: inherit; text-decoration: none; font-weight: 700; font-size: .95rem; }
+    .btn:hover { border-color: var(--red); color: var(--red); }
+    .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .btn.primary:hover { filter: brightness(1.08); color: #fff; }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .links a { padding: .55rem 1rem; border: 1px solid var(--line); border-radius: 999px; color: inherit; text-decoration: none; font-weight: 600; font-size: .95rem; }
+    .links a:hover { border-color: var(--red); color: var(--red); }
+    footer { max-width: 44rem; margin: 0 auto; padding: 24px 16px 48px; color: var(--muted); font-size: .85rem; border-top: 1px solid var(--line); }
+  </style>
+</head>
+<body>
+  <div class="flag" aria-hidden="true"></div>
+  <main>
+    <header class="intro">
+      <img class="avatar" src="avatar.webp" width="160" height="160" alt="Pixel-art portrait of Matt in headphones, surrounded by code">
+      <div>
+        <h1>Matt Grochocin<span>ski</span></h1>
+        <p class="lede">IT and security by day. Self-hosting and building things for the games I play by night.</p>
+      </div>
+    </header>
+
+    <div class="bio">
+      <p>Most of my free time goes into the server rack at home. It runs Mattyflix, a media server for my friends and family, plus game servers and a handful of apps I've built.</p>
+      <p>Most of those apps started as tools I wanted for myself: tracking story progress in Guild Wars 2, organizing a Star Wars: Unlimited collection, or a shared scoreboard for Marvel Champions game nights. When they turn out useful, I share them.</p>
+      <p>It goes back a long way. A few weeks after my dad brought home our family's first computer, an Acer with an Intel 486SX and 4&nbsp;MB of RAM, I was already the family expert. My grandfather was a mentor from across the country, but mostly I taught myself, and I never stopped.</p>
+      <p>That turned into a career: ten years of running IT at tech companies, from IT support to Head of IT, and today IT &amp; Security Manager. Knowing how systems are built and kept running, and how to keep them secure, is what makes the projects here work.</p>
+      <p>I like being the person with the answers, and I like sharing them even more. I'll never have all of them, and there will always be new problems to solve. I'm grateful for that.</p>
+    </div>
+
+    <h2>Things I've built</h2>
+    <div class="projects">
+      <button class="card" type="button" data-open="mattyflix" aria-haspopup="dialog"><b>Mattyflix</b><small>A private media server for friends and family</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="loot" aria-haspopup="dialog"><b>Mattyflix Loot</b><small>Spare Steam keys, shared with the community</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="storytimes" aria-haspopup="dialog"><b>GW2 Story Times</b><small>How long every Guild Wars 2 story mission takes</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="storytracker" aria-haspopup="dialog"><b>GW2 Story Tracker</b><small>Your story progress, and which character should finish what</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="pathfinder" aria-haspopup="dialog"><b>GW2 Pathfinder</b><small>Personalized achievement recommendations</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="blishhud" aria-haspopup="dialog"><b>Story Times for BlishHUD</b><small>Story mission times, right in the game</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="swu" aria-haspopup="dialog"><b>SWU Organizer</b><small>A Star Wars: Unlimited collection, binder by binder</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+      <button class="card" type="button" data-open="mcc" aria-haspopup="dialog"><b>Marvel Champions LCG Companion</b><small>A shared scoreboard for game night</small><span class="more" aria-hidden="true">More &rsaquo;</span></button>
+    </div>
+
+    <h2>Elsewhere</h2>
+    <div class="links">
+      <a href="https://github.com/MattyGroch">GitHub</a>
+      <a href="https://www.amongthefence.com">Among the Fence</a>
+    </div>
+  </main>
+  <footer>grochocin.ski</footer>
+
+  <dialog id="mattyflix" aria-labelledby="mattyflix-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="mattyflix-title">Mattyflix</h3>
+      <p class="tag">A private media server for friends and family</p>
+      <div class="gallery">
+        <a class="main" href="shots/mattyflix-members.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/mattyflix-members.webp" alt="The Mattyflix member links page" loading="lazy"></a>
+        <div class="thumbs">
+          <button type="button" data-src="shots/mattyflix-members.webp" data-alt="The Mattyflix member links page" aria-current="true" aria-label="Screenshot 1: The Mattyflix member links page"><img src="shots/mattyflix-members.webp" alt="" loading="lazy"></button>
+          <button type="button" data-src="shots/mattyflix-faq.webp" data-alt="The Mattyflix FAQ: how it all works" aria-label="Screenshot 2: The Mattyflix FAQ: how it all works"><img src="shots/mattyflix-faq.webp" alt="" loading="lazy"></button>
+        </div>
+      </div>
+        <p>Mattyflix is the Plex server I run at home for friends and family: thousands of movies and shows, a site to request what&#x27;s missing, a weekly newsletter of what&#x27;s new, and a Discord community around it.</p>
+        <p>Behind it is a rack of NAS storage and a small Proxmox server running about 40 containers that find, download, organize and eventually clean up everything automatically.</p>
+        <ul>
+          <li>Requests through Mattyflix Search, usually ready within a day</li>
+          <li>Personal watch stats, and a Rewind of your year every December</li>
+          <li>Invite only</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://www.mattyflix.com" target="_blank" rel="noopener">Visit Mattyflix</a>
+          <a class="btn" href="https://www.mattyflix.com/faq/" target="_blank" rel="noopener">How it works</a>
+          <a class="btn" href="https://github.com/MattyGroch/mattyflix-backend" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="loot" aria-labelledby="loot-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="loot-title">Mattyflix Loot</h3>
+      <p class="tag">Spare Steam keys, shared with the community</p>
+      <div class="gallery">
+        <a class="main" href="shots/loot-vault.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/loot-vault.webp" alt="Mattyflix Loot: the vault of available game keys" loading="lazy"></a>
+      </div>
+        <p>A vault for sharing spare Steam game keys with the Mattyflix community. Members sign in with Discord, link their Steam account, and spend credits to claim a game. I approve each request from a Discord DM.</p>
+        <p>It checks Steam so nobody gets a game they already own, keys are stored encrypted until they&#x27;re delivered, and a broken key refunds its credit automatically.</p>
+        <ul>
+          <li>Everyone starts with a credit and earns another every 30 days</li>
+          <li>Game details and art pulled straight from Steam</li>
+          <li>For Mattyflix members</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://loot.mattyflix.com" target="_blank" rel="noopener">Visit Loot</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="storytimes" aria-labelledby="storytimes-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="storytimes-title">GW2 Story Times</h3>
+      <p class="tag">How long every Guild Wars 2 story mission takes</p>
+      <div class="gallery">
+        <a class="main" href="shots/storytimes-seasons.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/storytimes-seasons.webp" alt="GW2 Story Times: total and per-season mission times" loading="lazy"></a>
+      </div>
+        <p>A community database of how long each Guild Wars 2 story mission takes, measured two ways: the full experience, with every cutscene and line of dialogue, and a speedrun.</p>
+        <p>It started with times gathered from YouTube walkthroughs and gets sharper with every run players submit. It has an open API, so anyone can build on it, and it powers the time estimates in GW2 Story Tracker and the BlishHUD module.</p>
+        <ul>
+          <li>Full-experience and speedrun times for every mission</li>
+          <li>Open REST API at api.gw2storytimes.com</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://gw2storytimes.com" target="_blank" rel="noopener">Visit Story Times</a>
+          <a class="btn" href="https://github.com/MattyGroch/gw2-storytimes" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="storytracker" aria-labelledby="storytracker-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="storytracker-title">GW2 Story Tracker</h3>
+      <p class="tag">Your story progress, and which character should finish what</p>
+      <div class="gallery">
+        <a class="main" href="shots/storytracker-demo.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/storytracker-demo.webp" alt="GW2 Story Tracker demo: a story journal with recommendations" loading="lazy"></a>
+      </div>
+        <p>Sign in with your Guild Wars 2 account and see your story journal progress across every character, from the Personal Story through the latest expansion.</p>
+        <p>It shows which character is closest to finishing each story and what to play next, with time estimates from GW2 Story Times. You can also share a link to your progress.</p>
+        <ul>
+          <li>&quot;Continue your journey&quot; recommendations</li>
+          <li>Knows which expansions you own</li>
+          <li>Try the demo, no login needed</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://gw2storytracker.com" target="_blank" rel="noopener">Visit Story Tracker</a>
+          <a class="btn" href="https://gw2storytracker.com/demo.html" target="_blank" rel="noopener">Try the demo</a>
+          <a class="btn" href="https://github.com/MattyGroch/gw2-storytracker" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="pathfinder" aria-labelledby="pathfinder-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="pathfinder-title">GW2 Pathfinder</h3>
+      <p class="tag">Personalized achievement recommendations</p>
+      <div class="gallery">
+        <a class="main" href="shots/pathfinder-dashboard.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/pathfinder-dashboard.webp" alt="GW2 Pathfinder dashboard with achievement goals" loading="lazy"></a>
+      </div>
+        <p>An achievement tracker for Guild Wars 2 that suggests what to work on next, based on your own account.</p>
+        <p>There are thousands of achievements in the game. Pathfinder helps you find the ones worth chasing.</p>
+      <div class="actions">
+          <a class="btn primary" href="https://gw2pathfinder.com" target="_blank" rel="noopener">Visit Pathfinder</a>
+          <a class="btn" href="https://github.com/MattyGroch/gw2-pathfinder" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="blishhud" aria-labelledby="blishhud-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="blishhud-title">Story Times for BlishHUD</h3>
+      <p class="tag">Story mission times, right in the game</p>
+      <div class="gallery">
+        <a class="main" href="shots/blishhud-widget.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/blishhud-widget.webp" alt="The in-game Story Times widget with timer and estimate" loading="lazy"></a>
+        <div class="thumbs">
+          <button type="button" data-src="shots/blishhud-widget.webp" data-alt="The in-game Story Times widget with timer and estimate" aria-current="true" aria-label="Screenshot 1: The in-game Story Times widget with timer and estimate"><img src="shots/blishhud-widget.webp" alt="" loading="lazy"></button>
+          <button type="button" data-src="shots/blishhud-browser.webp" data-alt="The in-game mission browser" aria-label="Screenshot 2: The in-game mission browser"><img src="shots/blishhud-browser.webp" alt="" loading="lazy"></button>
+        </div>
+      </div>
+        <p>A Blish HUD module that brings GW2 Story Times into Guild Wars 2. A small overlay shows the current mission&#x27;s time estimate, times your run with a built-in stopwatch, and submits your time to the community database in one click.</p>
+        <ul>
+          <li>Covers every story season from My Story onward</li>
+          <li>Install it from Blish HUD&#x27;s module browser: search for Story Times</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://github.com/MattyGroch/gw2-storytimerwidget" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="swu" aria-labelledby="swu-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="swu-title">SWU Organizer</h3>
+      <p class="tag">A Star Wars: Unlimited collection, binder by binder</p>
+      <div class="gallery">
+        <a class="main" href="shots/swu-binder.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/swu-binder.webp" alt="SWU Organizer binder view with card art" loading="lazy"></a>
+        <div class="thumbs">
+          <button type="button" data-src="shots/swu-binder.webp" data-alt="SWU Organizer binder view with card art" aria-current="true" aria-label="Screenshot 1: SWU Organizer binder view with card art"><img src="shots/swu-binder.webp" alt="" loading="lazy"></button>
+          <button type="button" data-src="shots/swu-list.webp" data-alt="SWU Organizer list view with collection status and prices" aria-label="Screenshot 2: SWU Organizer list view with collection status and prices"><img src="shots/swu-list.webp" alt="" loading="lazy"></button>
+          <button type="button" data-src="shots/swu-stats.webp" data-alt="SWU Organizer collection stats by set" aria-label="Screenshot 3: SWU Organizer collection stats by set"><img src="shots/swu-stats.webp" alt="" loading="lazy"></button>
+        </div>
+      </div>
+        <p>Track a Star Wars: Unlimited collection the way it actually sits in your binders, slot by slot and printing by printing.</p>
+        <p>Scan cards in with your phone&#x27;s camera, check decklists against what you own, and get walked through putting new cards away. It installs like an app, works offline, and syncs across devices.</p>
+        <ul>
+          <li>Every printing tracked separately, from Normal to Prestige Serialized</li>
+          <li>Card scanner that recognizes the art, foils and Hyperspace included</li>
+          <li>Deck checking for Premier and Twin Suns</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://swu.mattyflix.com" target="_blank" rel="noopener">Visit SWU Organizer</a>
+          <a class="btn" href="https://github.com/MattyGroch/SWU-Organizer" target="_blank" rel="noopener">Source</a>
+      </div>
+    </div>
+  </dialog>
+  <dialog id="mcc" aria-labelledby="mcc-title">
+    <div class="sheet">
+      <button class="close" type="button" aria-label="Close" data-close>&times;</button>
+      <h3 id="mcc-title">Marvel Champions LCG Companion</h3>
+      <p class="tag">A shared scoreboard for game night</p>
+      <div class="gallery">
+        <a class="main" href="shots/mcc-phone.webp" target="_blank" rel="noopener" title="Open full size"><img src="shots/mcc-phone.webp" alt="Marvel Champions Companion on a phone during a game" loading="lazy"></a>
+        <div class="thumbs">
+          <button type="button" data-src="shots/mcc-phone.webp" data-alt="Marvel Champions Companion on a phone during a game" aria-current="true" aria-label="Screenshot 1: Marvel Champions Companion on a phone during a game"><img src="shots/mcc-phone.webp" alt="" loading="lazy"></button>
+          <button type="button" data-src="shots/mcc-tv.webp" data-alt="Marvel Champions Companion TV view" aria-label="Screenshot 2: Marvel Champions Companion TV view"><img src="shots/mcc-tv.webp" alt="" loading="lazy"></button>
+        </div>
+      </div>
+        <p>A digital scoreboard for Marvel Champions: The Card Game. The cards stay on the table, and the app tracks what&#x27;s hard to read across it: villain HP, scheme threat, statuses and who&#x27;s first player.</p>
+        <p>Friends join from their phones with a four-letter code, and every change shows up for everyone instantly. A TV mode, with Chromecast support, puts the whole board on the big screen.</p>
+        <ul>
+          <li>No accounts needed for players</li>
+          <li>Any mis-tap can be undone</li>
+          <li>Hero, villain and scheme data synced from MarvelCDB</li>
+        </ul>
+      <div class="actions">
+          <a class="btn primary" href="https://mcc.mattyflix.com" target="_blank" rel="noopener">Visit the Companion</a>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    document.querySelectorAll('[data-open]').forEach(function (b) {
+      b.addEventListener('click', function () { document.getElementById(b.dataset.open).showModal(); });
+    });
+    document.querySelectorAll('.gallery').forEach(function (g) {
+      var link = g.querySelector('.main'), img = link.querySelector('img');
+      g.querySelectorAll('.thumbs button').forEach(function (t) {
+        t.addEventListener('click', function () {
+          img.src = t.dataset.src; img.alt = t.dataset.alt; link.href = t.dataset.src;
+          g.querySelectorAll('.thumbs button').forEach(function (o) { o.removeAttribute('aria-current'); });
+          t.setAttribute('aria-current', 'true');
+        });
+      });
+    });
+    document.querySelectorAll('dialog').forEach(function (d) {
+      d.addEventListener('click', function (e) { if (e.target === d || e.target.hasAttribute('data-close')) d.close(); });
+    });
+  </script>
+</body>
+</html>
